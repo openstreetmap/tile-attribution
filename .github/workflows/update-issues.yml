@@ -1,6 +1,9 @@
 name: Update Issues
 
 on:
+  push:
+    branches:
+      - 'main'
   issues:
     types: [opened, reopened, closed, labeled, unlabeled]
   workflow_dispatch:
