@@ -26,9 +26,9 @@ body:
     - label: The usage of the tiles is non-trivial. (Not a development site, not test code, not a personal project with negligible traffic, etc.)
       required: true
     - label: You have contacted the website/app owner or representative using the Love Letter model/template (https://osmfoundation.org/wiki/Licence/Attribution_Reminder_Templates) more than a week ago and no proper attribution has been added.
-      required: true
+      required: false
     - label: Or you have made a good faith effort to find working contact information for the website/app owner or representative but were unable to find a means to contact them.
-      required: true
+      required: false
 - type: markdown
   attributes:
     value: "## By checking the boxes above, you self-certify that you have fulfilled these criteria.\n---\n"
@@ -54,6 +54,8 @@ body:
 - type: markdown
   attributes:
     value: "Screenshot and URL of the Unattributed Map:"
+  validations:
+    required: true
 - type: checkboxes
   attributes:
     label: "The infringement is a:"
@@ -80,5 +82,3 @@ body:
 - type: markdown
   attributes:
     value: "By submitting this form, you affirm that all the details provided above are true and accurate to the best of your knowledge.\nAny updates and follow-ups will take place in the issue tracker here."
-  validations:
-    required: false
