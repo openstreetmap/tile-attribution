@@ -20,9 +20,9 @@ client.auto_paginate = true
 issues = client.issues(repo, state: "open", labels: "accepted")
 
 CSV.open("tile-attribution.csv", "w") do |csv|
-  csv << ["title", "number", "date"]
+  csv << ["title", "link", "date"]
   issues.each do |issue|
-    csv << [issue.title, issue.number, issue.closed_at]
+    csv << [issue.title, issue.html_url, issue.created_at]
   end
 end
 
