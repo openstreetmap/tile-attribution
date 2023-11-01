@@ -1,0 +1,81 @@
+name: OpenStreetMap Unattributed Tile Usage Report Form
+description: File report about tile usage policy violation
+title: "please-set-title"
+labels: ["Missing attribution - OSMF tiles", "Needs triage"]
+body:
+
+- type: markdown
+  attributes:
+    value: "# OpenStreetMap Unattributed Tile Usage Report Form\nWhere tiles served from OSMF servers are used without [proper attribution](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) and [gentle reminder](https://osmfoundation.org/wiki/Licence/Attribution_Reminder_Templates) failed."
+
+- type: checkboxes
+  attributes:
+    label: "Is it maybe reported already?"
+    description: Please search to see if an issue already exists for that specific case.
+    options:
+    - label: I have searched the existing issues, it is not reported already
+      required: true
+- type: checkboxes
+  attributes:
+    label: "Before you submit this form, please ensure the following criteria are met:"
+    options:
+    - label: The website/app in question uses map tiles hosted by the OpenStreetMap foundation (https://tile.openstreetmap.org).
+    - label: "The website/app does not have proper attribution. (https://osmfoundation.org/wiki/Licence/Attribution_Guidelines)"
+    - label: The usage of the tiles is non-trivial. (Not a development site, not test code, not a personal project with negligible traffic, etc.)
+    - label: You have contacted the website/app owner or representative using the Love Letter model/template (https://osmfoundation.org/wiki/Licence/Attribution_Reminder_Templates) more than a week ago and no proper attribution has been added.
+    - label: Or you have made a good faith effort to find working contact information for the website/app owner or representative but were unable to find a means to contact them.
+      required: true
+- type: markdown
+  attributes:
+    value: "## By checking the boxes above, you self-certify that you have fulfilled these criteria.\n---\n"
+- type: markdown
+  attributes:
+    value: "Copy of the Message Sent to the Map User (can be skipped if contacting them was impossible):"
+- type: input
+  attributes:
+    label: "Date and time of the message (has it happened more than a week ago?):"
+- type: input
+  attributes:
+    label: "Where did you send it?"
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: "Please paste the content of the Love Letter you sent to the map user here."
+  validations:
+    required: false
+- type: markdown
+  attributes:
+    value: "----"
+- type: markdown
+  attributes:
+    value: "Screenshot and URL of the Unattributed Map:"
+- type: checkboxes
+  attributes:
+    label: "The infringement is a:"
+    options:
+    - label: website
+    - label: app or other
+      required: true
+- type: textarea
+  attributes:
+    label: Please drag and drop or attach the screenshot showing the map without proper attribution here.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Where it is happening?
+    description: "If website: URL where the unattributed map can be found: Provide a valid URL.\nIf app: URL where the app can be downloaded: Provide a valid URL [Tip: Ensure the URL is correctly formatted and the screenshot clearly displays the map without proper attribution.]"
+  validations:
+    required: false
+- type: input
+  attributes:
+    label: "Previous Reports:"
+    description: Have you reported this site before for another attribution issue? If yes, where? Please paste the URL to the previous report
+  validations:
+    required: false
+- type: markdown
+  attributes:
+    value: "By submitting this form, you affirm that all the details provided above are true and accurate to the best of your knowledge.\nAny updates and follow-ups will take place in the issue tracker here."
+  validations:
+    required: false
