@@ -20,9 +20,13 @@ body:
     label: "Before you submit this form, please ensure the following criteria are met:"
     options:
     - label: The website/app in question uses map tiles hosted by the OpenStreetMap foundation (https://tile.openstreetmap.org).
+      required: true
     - label: "The website/app does not have proper attribution. (https://osmfoundation.org/wiki/Licence/Attribution_Guidelines)"
+      required: true
     - label: The usage of the tiles is non-trivial. (Not a development site, not test code, not a personal project with negligible traffic, etc.)
+      required: true
     - label: You have contacted the website/app owner or representative using the Love Letter model/template (https://osmfoundation.org/wiki/Licence/Attribution_Reminder_Templates) more than a week ago and no proper attribution has been added.
+      required: true
     - label: Or you have made a good faith effort to find working contact information for the website/app owner or representative but were unable to find a means to contact them.
       required: true
 - type: markdown
@@ -56,7 +60,6 @@ body:
     options:
     - label: website
     - label: app or other
-      required: true
 - type: textarea
   attributes:
     label: Please drag and drop or attach the screenshot showing the map without proper attribution here.
