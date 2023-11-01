@@ -1,0 +1,36 @@
+#!/usr/bin/ruby
+
+require "git"
+require "octokit"
+require "csv"
+
+gitdir = Dir.pwd
+
+git = Git.open(gitdir)
+
+git.config("user.name", "Tile-Attribution Updater")
+git.config("user.email", "admins@openstreetmap.org")
+
+# GitHub repository in the format "owner/repo"
+repo = ENV["GITHUB_REPOSITORY"]
+branch = ENV["GITHUB_REF_NAME"]
+
+client = Octokit::Client.new(:bearer_token => ENV["GITHUB_TOKEN"])
+client.auto_paginate = true
+issues = client.issues(repo, state: "open", labels: "accepted")
+
+CSV.open("tile-attribution.csv", "w") do |csv|
+  csv << ["title", "number", "date"]
+  issues.each do |issue|
+    csv << [issue.title, issue.number, issue.closed_at]
+  end
+end
+
+puts "Add tile-attribution.csv to git"
+git.add("tile-attribution.csv")
+
+puts "Commit changes to #{branch}..."
+git.commit("Update tile-attribution.csv")
+
+puts "Push branch #{branch}..."
+git.push("origin", branch)

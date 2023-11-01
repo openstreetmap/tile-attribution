@@ -1,0 +1,27 @@
+name: Update Issues
+
+on:
+  issues:
+    types: [opened, reopened, closed, labeled, unlabeled]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  updater:
+    name: Update Issues
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+    - name: Setup ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ruby
+        bundler-cache: true
+    - name: Run updater
+      run: bundle exec ruby bin/update-issues
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
