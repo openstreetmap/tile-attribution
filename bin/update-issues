@@ -26,11 +26,13 @@ CSV.open("tile-attribution.csv", "w") do |csv|
   end
 end
 
-puts "Add tile-attribution.csv to git"
-git.add("tile-attribution.csv")
+if git.status.changed.include?("tile-attribution.csv")
+  puts "Add tile-attribution.csv to git"
+  git.add("tile-attribution.csv")
 
-puts "Commit changes to #{branch}..."
-git.commit("Update tile-attribution.csv")
+  puts "Commit changes to #{branch}..."
+  git.commit("Update tile-attribution.csv")
 
-puts "Push branch #{branch}..."
-git.push("origin", branch)
+  puts "Push branch #{branch}..."
+  git.push("origin", branch)
+end
