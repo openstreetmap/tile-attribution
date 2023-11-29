@@ -28,6 +28,8 @@ def generate_commit_message(git)
   "#{action} #{content} to #{TILE_ATTRIBUTION_FILE}"
 end
 
+git = Git.open(gitdir)
+
 git.config("user.name", "Tile-Attribution Updater")
 git.config("user.email", "admins@openstreetmap.org")
 
