@@ -4,9 +4,29 @@ require "git"
 require "octokit"
 require "csv"
 
+TILE_ATTRIBUTION_FILE = "tile-attribution.csv"
 gitdir = Dir.pwd
 
-git = Git.open(gitdir)
+def log_message(message)
+  puts "#{Time.now}: #{message}"
+end
+
+def generate_commit_message(git)
+  diff_output = git.diff('HEAD', TILE_ATTRIBUTION_FILE).patch
+  last_line = diff_output.lines.last
+
+  if last_line.start_with?('+') && !last_line.include?('+ ')
+    action = "Added"
+    content = last_line[1..].strip.split(',')[0] # Assuming the first CSV column contains the desired content
+  elsif last_line.start_with?('-') && !last_line.include?('- ')
+    action = "Removed"
+    content = last_line[1..].strip.split(',')[0]
+  else
+    return "Updated #{TILE_ATTRIBUTION_FILE}"
+  end
+
+  "#{action} #{content} to #{TILE_ATTRIBUTION_FILE}"
+end
 
 git.config("user.name", "Tile-Attribution Updater")
 git.config("user.email", "admins@openstreetmap.org")
@@ -15,24 +35,30 @@ git.config("user.email", "admins@openstreetmap.org")
 repo = ENV["GITHUB_REPOSITORY"]
 branch = ENV["GITHUB_REF_NAME"]
 
-client = Octokit::Client.new(:bearer_token => ENV["GITHUB_TOKEN"])
+# Pull all changes
+log_message("Pulling changes from #{branch}...")
+git.fetch("origin")
+git.reset_hard("origin/#{branch}")
+
+client = Octokit::Client.new(bearer_token: ENV["GITHUB_TOKEN"])
 client.auto_paginate = true
 issues = client.issues(repo, state: "open", labels: "accepted")
 
-CSV.open("tile-attribution.csv", "w") do |csv|
+CSV.open(TILE_ATTRIBUTION_FILE, "w") do |csv|
   csv << ["title", "link", "date"]
   issues.each do |issue|
     csv << [issue.title, issue.html_url, issue.created_at]
   end
 end
 
-if git.status.changed.include?("tile-attribution.csv")
-  puts "Add tile-attribution.csv to git"
-  git.add("tile-attribution.csv")
+if git.status.changed.include?(TILE_ATTRIBUTION_FILE)
+  log_message("Add #{TILE_ATTRIBUTION_FILE} to git")
+  git.add(TILE_ATTRIBUTION_FILE)
 
-  puts "Commit changes to #{branch}..."
-  git.commit("Update tile-attribution.csv")
+  commit_message = generate_commit_message(git)
+  log_message("Commit changes to #{branch} with message: '#{commit_message}'")
+  git.commit(commit_message)
 
-  puts "Push branch #{branch}..."
+  log_message("Push branch #{branch}...")
   git.push("origin", branch)
 end
