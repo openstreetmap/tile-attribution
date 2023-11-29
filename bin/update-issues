@@ -13,14 +13,21 @@ end
 
 def generate_commit_message(git)
   diff_output = git.diff('HEAD', TILE_ATTRIBUTION_FILE).patch
-  last_line = diff_output.lines.last
+  change_lines = diff_output.lines.select { |line| line.start_with?('+') || line.start_with?('-') }
 
-  if last_line.start_with?('+') && !last_line.include?('+ ')
+  # Filter out diff metadata lines (which start with '+ ' or '- ')
+  change_lines.reject! { |line| line =~ /^(\+ |- )/ }
+
+  return "Updated #{TILE_ATTRIBUTION_FILE}" if change_lines.empty?
+
+  last_change = change_lines.last
+
+  if last_change.start_with?('+')
     action = "Added"
-    content = last_line[1..].strip.split(',')[0] # Assuming the first CSV column contains the desired content
-  elsif last_line.start_with?('-') && !last_line.include?('- ')
+    content = last_change[1..].strip.split(',')[0] # Assuming the first CSV column contains the desired content
+  elsif last_change.start_with?('-')
     action = "Removed"
-    content = last_line[1..].strip.split(',')[0]
+    content = last_change[1..].strip.split(',')[0]
   else
     return "Updated #{TILE_ATTRIBUTION_FILE}"
   end
