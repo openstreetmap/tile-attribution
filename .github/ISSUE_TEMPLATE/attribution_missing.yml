@@ -1,6 +1,6 @@
 name: OpenStreetMap Unattributed Tile Usage Report Form
 description: File report about tile usage policy violation
-title: "please-set-title"
+title: "Domain name or subdomain to block (whole name, nothing but the name, e.g. map.example.com)"
 labels: ["Missing attribution - OSMF tiles", "Needs triage"]
 body:
 
