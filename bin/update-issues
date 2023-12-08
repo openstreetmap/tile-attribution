@@ -68,7 +68,7 @@ File.open(TILE_ATTRIBUTION_JSON, 'w') do |file|
   file.write(JSON.pretty_generate(issue_data))
 end
 
-if git.status.changed.include?(TILE_ATTRIBUTION_FILE)
+if git.status.changed.include?(TILE_ATTRIBUTION_FILE) || git.status.changed.include?(TILE_ATTRIBUTION_JSON)
   log_message("Add #{TILE_ATTRIBUTION_FILE} to git")
   git.add(TILE_ATTRIBUTION_FILE)
 
