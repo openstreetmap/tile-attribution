@@ -1,10 +1,13 @@
 #!/usr/bin/ruby
+# frozen_string_literal: true
 
-require "git"
-require "octokit"
-require "csv"
+require 'git'
+require 'octokit'
+require 'csv'
+require 'json'
 
-TILE_ATTRIBUTION_FILE = "tile-attribution.csv"
+TILE_ATTRIBUTION_FILE = 'tile-attribution.csv'
+TILE_ATTRIBUTION_JSON = 'tile-attribution.json'
 gitdir = Dir.pwd
 
 def log_message(message)
@@ -23,10 +26,10 @@ def generate_commit_message(git)
   last_change = change_lines.last
 
   if last_change.start_with?('+')
-    action = "Added"
+    action = 'Added'
     content = last_change[1..].strip.split(',')[0] # Assuming the first CSV column contains the desired content
   elsif last_change.start_with?('-')
-    action = "Removed"
+    action = 'Removed'
     content = last_change[1..].strip.split(',')[0]
   else
     return "Updated #{TILE_ATTRIBUTION_FILE}"
@@ -37,37 +40,45 @@ end
 
 git = Git.open(gitdir)
 
-git.config("user.name", "Tile-Attribution Updater")
-git.config("user.email", "admins@openstreetmap.org")
+git.config('user.name', 'Tile-Attribution Updater')
+git.config('user.email', 'admins@openstreetmap.org')
 
 # GitHub repository in the format "owner/repo"
-repo = ENV["GITHUB_REPOSITORY"]
-branch = ENV["GITHUB_REF_NAME"]
+repo = ENV['GITHUB_REPOSITORY']
+branch = ENV['GITHUB_REF_NAME']
 
 # Pull all changes
 log_message("Pulling changes from #{branch}...")
-git.fetch("origin")
+git.fetch('origin')
 git.reset_hard("origin/#{branch}")
 
-client = Octokit::Client.new(bearer_token: ENV["GITHUB_TOKEN"])
+client = Octokit::Client.new(bearer_token: ENV['GITHUB_TOKEN'])
 client.auto_paginate = true
-issues = client.issues(repo, state: "open", labels: "accepted")
+issues = client.issues(repo, state: 'open', labels: 'accepted')
 
-CSV.open(TILE_ATTRIBUTION_FILE, "w") do |csv|
-  csv << ["title", "link", "date"]
+CSV.open(TILE_ATTRIBUTION_FILE, 'w') do |csv|
+  csv << %w[title link date]
   issues.each do |issue|
     csv << [issue.title, issue.html_url, issue.created_at]
   end
+end
+
+File.open(TILE_ATTRIBUTION_JSON, 'w') do |file|
+  issue_data = issues.map { |issue| [issue[:title], issue[:html_url]] }.to_h
+  file.write(JSON.pretty_generate(issue_data))
 end
 
 if git.status.changed.include?(TILE_ATTRIBUTION_FILE)
   log_message("Add #{TILE_ATTRIBUTION_FILE} to git")
   git.add(TILE_ATTRIBUTION_FILE)
 
+  log_message("Add #{TILE_ATTRIBUTION_JSON} to git")
+  git.add(TILE_ATTRIBUTION_JSON)
+
   commit_message = generate_commit_message(git)
   log_message("Commit changes to #{branch} with message: '#{commit_message}'")
   git.commit(commit_message)
 
   log_message("Push branch #{branch}...")
-  git.push("origin", branch)
+  git.push('origin', branch)
 end
