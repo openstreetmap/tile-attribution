@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
   issues:
-    types: [opened, reopened, closed, labeled, unlabeled]
+    types: [opened, reopened, closed, labeled, unlabeled, edited]
   workflow_dispatch:
 
 permissions:
