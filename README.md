@@ -8,3 +8,7 @@ Please [create a new issue](https://github.com/openstreetmap/tile-attribution/is
 Help with educating people about attribution requirements is welcome and helpful and reporting cases where it has not resulted in improvements is also encouraged.
 
 [Lacking proper attribution](https://wiki.openstreetmap.org/wiki/Lacking_proper_attribution) on the OSM Wiki is a closely related listing, covering all kinds of cases of attribution issues, while this repository covers only cases where entities are using the OSMF standard layer and the OSM community already attempted contact and was ignored.
+
+## Technical details
+
+Block once accepted may take up to 24 hours to apply.
