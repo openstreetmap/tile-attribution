@@ -1,7 +1,7 @@
 OpenStreetMap Tile Attribution Issue Tracker
 ======================================
 
-This repository is used for reporting and tracking sites which are using tile.openstreetmap.org servers but not attributing OpenStreetMap. The sites are tracked in the [issue tracker](https://github.com/openstreetmap/tile-attribution/issues). When a site's issue is flagged as "Accepted" the website will automatically be blocked from using tile.openstreetmap.org within 24 hours.
+This repository is used for reporting and tracking sites which are using tile.openstreetmap.org servers but not attributing OpenStreetMap. The sites are tracked in the [issue tracker](https://github.com/openstreetmap/tile-attribution/issues). When a site's issue is flagged as "[Accepted](https://github.com/openstreetmap/tile-attribution/issues?q=is%3Aissue+is%3Aopen+label%3Aaccepted)" the website will automatically be blocked from using tile.openstreetmap.org within 24 hours.
 
 Please [create a new issue](https://github.com/openstreetmap/tile-attribution/issues/new/choose) to report problematic cases. Note that some steps needs to be first taken first and these steps are listed in the issue template.
 
