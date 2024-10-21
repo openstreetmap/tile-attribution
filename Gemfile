@@ -6,4 +6,4 @@ gem 'git', '~> 2.3.0'
 gem 'json', '~> 2.7'
 gem 'octokit', '~> 9.1.0'
 
-gem 'rubocop', '~> 1.66', groups: 'development'
+gem 'rubocop', '~> 1.67', groups: 'development'
