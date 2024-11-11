@@ -31,7 +31,7 @@ GEM
       rchardet (~> 1.8)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    json (2.7.5)
+    json (2.8.1)
     language_server-protocol (3.17.0.3)
     logger (1.6.1)
     minitest (5.25.1)
@@ -78,7 +78,7 @@ PLATFORMS
 
 DEPENDENCIES
   git (~> 2.3.1)
-  json (~> 2.7)
+  json (~> 2.8)
   octokit (~> 9.1.0)
   rubocop (~> 1.66)
 
