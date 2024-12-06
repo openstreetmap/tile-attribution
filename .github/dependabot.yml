@@ -8,3 +8,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # ignore updates of minor importance
+      - dependency-name: "git"
+        update-types: ["version-update:semver-patch"]
