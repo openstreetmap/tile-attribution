@@ -8,6 +8,6 @@ gem 'octokit', '~> 9.2.0'
 
 gem 'rubocop', '~> 1.66', groups: 'development'
 
-gem "faraday-retry", "~> 2.2"
+gem "faraday-retry", "~> 2.3"
 
 gem "csv", "~> 3.3"
