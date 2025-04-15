@@ -12,3 +12,5 @@ updates:
       # ignore updates of minor importance
       - dependency-name: "git"
         update-types: ["version-update:semver-patch"]
+      - dependency-name: "csv"
+        update-types: ["version-update:semver-patch"]
