@@ -39,7 +39,7 @@ GEM
       rchardet (~> 1.9)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    json (2.13.0)
+    json (2.13.2)
     language_server-protocol (3.17.0.3)
     logger (1.7.0)
     minitest (5.25.5)
