@@ -37,7 +37,7 @@ body:
     value: "Copy of the Message Sent to the Map User (can be skipped if contacting them was impossible):"
 - type: input
   attributes:
-    label: "Date and time of the message (has it happened more than a week ago?):"
+    label: "Date when the message was send (has it happened more than a week ago?):"
 - type: input
   attributes:
     label: "Where did you send it?"
