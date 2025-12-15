@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'git', '~> 4.0.1'
-gem 'json', '~> 2.16'
+gem 'json', '~> 2.18'
 gem 'octokit', '~> 9.2.0'
 
 gem 'rubocop', '~> 1.66', groups: 'development'
