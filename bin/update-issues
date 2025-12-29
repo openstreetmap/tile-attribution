@@ -35,7 +35,7 @@ def generate_commit_message(git)
     return "Updated #{TILE_ATTRIBUTION_FILE}"
   end
 
-  "#{action} #{content} to #{TILE_ATTRIBUTION_FILE}"
+  "#{action} #{content} in #{TILE_ATTRIBUTION_FILE}"
 end
 
 git = Git.open(gitdir)
