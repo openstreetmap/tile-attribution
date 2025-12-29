@@ -24,13 +24,13 @@ GEM
     connection_pool (2.5.3)
     csv (3.3.5)
     drb (2.2.3)
-    faraday (2.13.4)
+    faraday (2.14.0)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.4.1)
-      net-http (>= 0.5.0)
-    faraday-retry (2.3.2)
+    faraday-net_http (3.4.2)
+      net-http (~> 0.5)
+    faraday-retry (2.4.0)
       faraday (~> 2.0)
     git (4.0.4)
       activesupport (>= 5.0)
@@ -44,8 +44,8 @@ GEM
     lint_roller (1.1.0)
     logger (1.7.0)
     minitest (5.25.5)
-    net-http (0.6.0)
-      uri
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     octokit (9.2.0)
       faraday (>= 1, < 3)
       sawyer (~> 0.9)
@@ -86,7 +86,7 @@ GEM
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
-    uri (1.0.3)
+    uri (1.1.1)
 
 PLATFORMS
   arm64-darwin
@@ -95,7 +95,7 @@ PLATFORMS
 
 DEPENDENCIES
   csv (~> 3.3)
-  faraday-retry (~> 2.3)
+  faraday-retry (~> 2.4)
   git (~> 4.0.1)
   json (~> 2.16)
   octokit (~> 9.2.0)
