@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'git', '~> 4.0.1'
+gem 'git', '~> 4.1.0'
 gem 'json', '~> 2.18'
 gem 'octokit', '~> 9.2.0'
 
