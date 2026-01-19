@@ -31,7 +31,7 @@ GEM
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
-    git (4.2.0)
+    git (4.3.0)
       activesupport (>= 5.0)
       addressable (~> 2.8)
       process_executer (~> 4.0)
@@ -53,7 +53,7 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
-    prism (1.7.0)
+    prism (1.8.0)
     process_executer (4.0.2)
       track_open_instances (~> 0.1)
     public_suffix (7.0.2)
@@ -96,7 +96,7 @@ PLATFORMS
 DEPENDENCIES
   csv (~> 3.3)
   faraday-retry (~> 2.4)
-  git (~> 4.2.0)
+  git (~> 4.3.0)
   json (~> 2.18)
   octokit (~> 9.2.0)
   rubocop (~> 1.66)
