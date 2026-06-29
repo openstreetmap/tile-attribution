@@ -38,7 +38,7 @@ GEM
       rchardet (~> 1.9)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    json (2.19.9)
+    json (2.20.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -98,7 +98,7 @@ DEPENDENCIES
   csv (~> 3.3)
   faraday-retry (~> 2.4)
   git (~> 4.3.0)
-  json (~> 2.19)
+  json (~> 2.20)
   octokit (~> 9.2.0)
   rubocop (~> 1.66)
 
