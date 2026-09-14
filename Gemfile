@@ -2,9 +2,9 @@
 
 source 'https://rubygems.org'
 
-gem 'git', '~> 5.5.0'
+gem 'git', '~> 5.6.0'
 gem 'json', '~> 3.0'
-gem 'octokit', '~> 9.2.0'
+gem 'octokit', '~> 10.0.0'
 
 gem 'rubocop', '~> 1.66', groups: 'development'
 

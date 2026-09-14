@@ -40,8 +40,8 @@ end
 
 git = Git.open(gitdir)
 
-git.config('user.name', 'Tile-Attribution Updater')
-git.config('user.email', 'admins@openstreetmap.org')
+git.config_set('user.name', 'Tile-Attribution Updater')
+git.config_set('user.email', 'admins@openstreetmap.org')
 
 # GitHub repository in the format "owner/repo"
 repo = ENV['GITHUB_REPOSITORY']
@@ -50,7 +50,7 @@ branch = ENV['GITHUB_REF_NAME']
 # Pull all changes
 log_message("Pulling changes from #{branch}...")
 git.fetch('origin')
-git.reset_hard("origin/#{branch}")
+git.reset("origin/#{branch}", hard: true)
 
 client = Octokit::Client.new(bearer_token: ENV['GITHUB_TOKEN'])
 client.auto_paginate = true
@@ -68,7 +68,8 @@ File.open(TILE_ATTRIBUTION_JSON, 'w') do |file|
   file.write(JSON.pretty_generate(issue_data))
 end
 
-if git.status.changed.include?(TILE_ATTRIBUTION_FILE) || git.status.changed.include?(TILE_ATTRIBUTION_JSON)
+changed_files = git.status_info.changed
+if changed_files.include?(TILE_ATTRIBUTION_FILE) || changed_files.include?(TILE_ATTRIBUTION_JSON)
   log_message("Add #{TILE_ATTRIBUTION_FILE} to git")
   git.add(TILE_ATTRIBUTION_FILE)
 
